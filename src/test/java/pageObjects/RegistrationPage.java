@@ -35,6 +35,11 @@ public class RegistrationPage extends Basepage {
         driver.findElement(By.xpath("//input[@id=':r4:']")).sendKeys(password);
     }
 
+    public void clickCheckBox()
+    {
+        driver.findElement(By.xpath("//input[@id='flexCheckDefault']")).click();
+    }
+
     public void clickSignUpBtn()
     {
        WebElement signUpbtn=driver.findElement(By.xpath("//button[normalize-space()='Sign Up Now']"));

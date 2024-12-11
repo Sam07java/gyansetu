@@ -1,5 +1,6 @@
 package pageObjects;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -7,14 +8,17 @@ import org.openqa.selenium.WebElement;
 
 public class LoginPage extends Basepage {
 
-    public LoginPage(WebDriver driver)
-    {
+
+    public LoginPage(WebDriver driver) {
         super(driver);
     }
 
-    public void clickSigninBtn(){
+    public void clickSigBtn(){
 
-        driver.findElement(By.xpath("//div[@class='btn btn-secondary w-100 outsecbtn rounded-pill']")).click();
+       WebElement phone=driver.findElement(By.xpath("//div[text()='Sign in with Email / Phone']"));
+        JavascriptExecutor js=(JavascriptExecutor)driver;
+        js.executeScript("arguments[0].click()",phone);
+        //driver.findElement(By.xpath("//div[@class='btn btn-secondary w-100 outsecbtn rounded-pill']")).click();
 
     }
 
@@ -36,6 +40,23 @@ public class LoginPage extends Basepage {
 
         JavascriptExecutor js=(JavascriptExecutor)driver;
         js.executeScript("arguments[0].click()",clickk);
+    }
+
+    public void alrtHandling()
+    {
+        try {
+            WebElement dash = driver.findElement(By.xpath("//h3[normalize-space()='Hi, How can I help you today?']"));
+            dash.isDisplayed();
+            Assert.assertTrue(true);
+                System.out.println(dash.getText());
+
+        }
+        catch(Exception e)
+        {
+            WebElement alert=driver.findElement(By.xpath("//div[contains(text(),'Invalid userid or password')]"));
+            alert.getText();
+            Assert.fail("Login failed");
+        }
     }
 
 }

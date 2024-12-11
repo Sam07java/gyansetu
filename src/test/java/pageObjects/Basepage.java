@@ -3,11 +3,13 @@ package pageObjects;
 import org.openqa.selenium.WebDriver;
 
 public class Basepage {
-    WebDriver driver;
+    static WebDriver driver;
 
     public Basepage(WebDriver driver)
     {
-        this.driver=driver;
+        Basepage.driver =driver;
     }
+
+
 
 }
