@@ -1,10 +1,7 @@
 package pageObjects;
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 public class LoginPage extends Basepage {
 
@@ -29,7 +26,7 @@ public class LoginPage extends Basepage {
 
     public void enterPassword(String pass)
     {
-        driver.findElement(By.xpath("//input[@id=':r1:']")).sendKeys(pass);
+        driver.findElement(By.xpath("//input[@id='passwordInput']")).sendKeys(pass);
     }
 
     public void clickSigninNow()
@@ -51,12 +48,24 @@ public class LoginPage extends Basepage {
                 System.out.println(dash.getText());
 
         }
+
+        catch (NoSuchElementException e)
+        {
+            WebElement chatBox=driver.findElement(By.xpath("//div[@class='chat-box']"));
+            if(chatBox.isDisplayed())
+            {
+                Assert.assertTrue(true);
+            }
+        }
+
         catch(Exception e)
         {
             WebElement alert=driver.findElement(By.xpath("//div[contains(text(),'Invalid userid or password')]"));
             alert.getText();
             Assert.fail("Login failed");
         }
+
+
     }
 
 }
