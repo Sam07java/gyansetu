@@ -1,4 +1,18 @@
 Feature: User on login page and login with valid and invalid inputs from Excel "<Shortname>" and "<RowNumber>"
+Scenario Outline:
+  Given I am on the registration page
+  When fetch registratio data from exel sheet "<Shortname>" and "<RowNumber>"
+  Then I should see successfull registration
+
+  Examples:
+    | Shortname | RowNumber |
+    | Sheet1    | 0         |
+    | Sheet1    | 1         |
+    | Sheet1    | 2         |
+    | Sheet1    | 3         |
+    | Sheet1    | 4         |
+    | Sheet1    | 5         |
+    | Sheet1    | 6         |
 
   Scenario Outline: Validate login with external data sheet
     Given User is on the signing page
